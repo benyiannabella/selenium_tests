@@ -17,6 +17,7 @@ public class WishListTest {
         driver.findElement(By.className("nav-5")).click();
         driver.findElement(By.linkText("VIEW DETAILS")).click();
         driver.findElement(By.className("link-wishlist")).click();
+        driver.quit();
 
     }
 }
