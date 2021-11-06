@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.qa_automation.BaseClass;
+import org.qa_automation.pageObjects.Header;
+import org.qa_automation.pageObjects.Women;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,50 +20,41 @@ public class SortByPriceAscTest extends BaseClass {
     public void sortByPriceAscendingTest() {
 
         getWebPage();
+        Header header = new Header(driver);
+        Women women = new Women(driver);
 
-        WebElement mainMenu = driver.findElement(By.cssSelector("#header-nav li.level0.nav-1.first.parent"));
-        WebElement subMenu = driver.findElement(By.cssSelector("li.level1.nav-1-3 a"));
         Actions action = new Actions(driver);
-        action.moveToElement(mainMenu).perform();
-        action.moveToElement(subMenu).click().perform();
+        action.moveToElement(header.getWomenMenu()).perform();
+        action.moveToElement(women.getTopsBlouses()).click().perform();
 
-        Select select = new Select(driver.findElement(By.cssSelector(".sort-by select")));
+        Select select = new Select(women.getSort());
         select.selectByVisibleText("Price");
 
-        WebElement ascend = driver.findElement(By.cssSelector(".sort-by a"));
-        if (ascend.getText().equals("Set Ascending Direction")) {
-            ascend.click();
+        if (women.getSortOrder().getText().equals("Set Ascending Direction")) {
+            women.getSortOrder().click();
         }
 
-        WebElement grid = driver.findElement(By.cssSelector(".grid"));
-        if (!grid.isSelected()) {
-            grid.click();
-        }
-
+        women.clickGrid();
     }
 
     @Test
     public void sortByPriceAscendingListTest() {
         getWebPage();
+        Header header = new Header(driver);
+        Women women = new Women(driver);
 
-        WebElement mainMenu = driver.findElement(By.xpath("//li[@class='level0 nav-1 first parent']"));
-        WebElement subMenu = driver.findElement(By.xpath("//li[@class='level1 nav-1-3']"));
         Actions actions = new Actions(driver);
-        actions.moveToElement(mainMenu).perform();
-        actions.moveToElement(subMenu).click().perform();
+        actions.moveToElement(header.getWomenMenu()).perform();
+        actions.moveToElement(women.getTopsBlouses()).click().perform();
 
-        Select select = new Select(driver.findElement(By.xpath("//select[@title='Sort By']")));
+        Select select = new Select(women.getSort());
         select.selectByVisibleText("Price");
 
-        WebElement ascend = driver.findElement(By.xpath("//div[@class='sort-by']/a"));
-        if(ascend.getText().equals("Set Ascending Direction")){
-            ascend.click();
+        if(women.getSortOrder().getText().equals("Set Ascending Direction")){
+            women.getSortOrder().click();
         }
 
-        WebElement list = driver.findElement(By.cssSelector(".list"));
-        list.click();
-
-
+        women.clickList();
     }
 
 }

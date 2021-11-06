@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.qa_automation.BaseClass;
+import org.qa_automation.pageObjects.Header;
+import org.qa_automation.pageObjects.Women;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,24 +21,20 @@ public class SortByNameDescTest extends BaseClass {
 
         getWebPage();
 
-        WebElement mainMenu = driver.findElement(By.xpath("//li[@class = 'level0 nav-1 first parent']"));
-        WebElement subMenu = driver.findElement(By.xpath("//li[@class = 'level1 nav-1-2']/a"));
+        Header header = new Header(driver);
+        Women women = new Women(driver);
 
         Actions actions = new Actions(driver);
-        actions.moveToElement(mainMenu).perform();
-        actions.moveToElement(subMenu).click().perform();
+        actions.moveToElement(header.getWomenMenu()).perform();
+        actions.moveToElement(women.getNewArrivals()).click().perform();
 
-        Select name = new Select(driver.findElement(By.xpath("//div[@class='sort-by']" +
-                "/select")));
+        Select name = new Select(women.getSort());
         name.selectByVisibleText("Name");
 
-        WebElement desc = driver.findElement(By.xpath("//div[@class='sort-by']/a"));
-        if(desc.getText().equals("Set Descending Direction")){
-            desc.click();
+        if(women.getSortOrder().getText().equals("Set Descending Direction")){
+            women.getSortOrder().click();
         }
 
-        WebElement list = driver.findElement(By.xpath("//p[@class='view-mode']/a"));
-        list.click();
-
+        women.clickGrid();
     }
 }
