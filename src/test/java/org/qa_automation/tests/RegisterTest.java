@@ -1,28 +1,26 @@
 package org.qa_automation.tests;
 
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.qa_automation.BaseClass;
+import org.qa_automation.pageObjects.Header;
 
-public class RegisterTest {
+public class RegisterTest extends BaseClass {
 
     @Test
     public void registerTest(){
-        System.setProperty("webdriver.chrome.driver", "C:\\webdrivers\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://testfasttrackit.info/selenium-test/");
-        driver.findElement(By.linkText("ACCOUNT")).click();
-        driver.findElement(By.linkText("Register")).click();
-        driver.findElement(By.name("firstname")).sendKeys("Annabella");
-        driver.findElement(By.id("middlename")).sendKeys("Cz");
-        driver.findElement(By.name("lastname")).sendKeys("Benyi");
-        driver.findElement(By.name("email")).sendKeys("test@email.com");
-        driver.findElement(By.className("validate-password")).sendKeys("test123*");
-        driver.findElement(By.className("validate-cpassword")).sendKeys("test123*");
-        driver.findElement(By.id("is_subscribed")).click();
 
-        driver.quit();
+        getWebPage();
+        Header header = new Header(driver);
+
+        header.clickAccount();
+        header.clickRegister();
+        header.sendFirstName("test1");
+        header.sendMiddleName("test2");
+        header.sendLastName("test3");
+        header.sendEmail("test@gmail.com");
+        header.sendPW("pass123");
+        header.sendAgainPW("pass123");
+        header.checkSubscribe();
     }
 
 

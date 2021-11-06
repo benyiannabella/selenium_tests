@@ -7,19 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.qa_automation.BaseClass;
 
 import java.util.concurrent.TimeUnit;
 
-public class SortByPriceDescTest {
+public class SortByPriceDescTest extends BaseClass {
 
     @Test
     public void sortByPriceDescTest(){
 
-        System.setProperty("webdriver.chrome.driver", "C:\\webdrivers\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://testfasttrackit.info/selenium-test");
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        getWebPage();
 
         WebElement mainMenu = driver.findElement(By.cssSelector("#header-nav li.level0.nav-1.first.parent"));
         WebElement subMenu = driver.findElement(By.cssSelector("li.level1.nav-1-3 a"));
@@ -39,17 +36,12 @@ public class SortByPriceDescTest {
         if(!grid.isSelected()){
             grid.click();
         }
-        driver.quit();
+
     }
 
     @Test
     public void sortByPriceDescListTest(){
-
-        System.setProperty("webdriver.chrome.driver", "C:\\webdrivers\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.get("http://testfasttrackit.info/selenium-test");
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        getWebPage();
 
         WebElement mainMenu = driver.findElement(By.xpath("//li[@class='level0 nav-1 first parent']/a"));
         WebElement subMenu = driver.findElement(By.xpath("//ul/li[@class='level1 nav-1-3']"));
@@ -67,6 +59,6 @@ public class SortByPriceDescTest {
 
         WebElement list = driver.findElement(By.cssSelector(".list"));
         list.click();
-        driver.quit();
+
     }
 }

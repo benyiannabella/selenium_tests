@@ -2,25 +2,16 @@ package org.qa_automation.testCases;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-import org.qa_automation.AppConfig;
+import org.qa_automation.BaseClass;
 
-import java.util.concurrent.TimeUnit;
-
-public class SortByNameAscTest {
+public class SortByNameAscTest extends BaseClass {
 
     @Test
     public void sortByNameAscListTest(){
-
-        System.setProperty("webdriver.chrome.driver", AppConfig.getChromeDriverPath());
-        WebDriver driver = new ChromeDriver();
-        driver.get(AppConfig.getApplicationPath());
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        getWebPage();
 
         WebElement mainMenu = driver.findElement(By.cssSelector("li.level0.nav-1.first.parent"));
         WebElement sunMenu = driver.findElement(By.cssSelector("li.level1.nav-1-2 a"));
@@ -40,6 +31,5 @@ public class SortByNameAscTest {
         WebElement list = driver.findElement(By.cssSelector("p.view-mode a.list"));
         list.click();
 
-        driver.quit();
     }
 }
